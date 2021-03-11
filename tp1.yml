@@ -1,0 +1,10 @@
+---
+- name: Instal htop
+  hosts: all
+  tasks:
+   - name: package htop
+     apt: 
+      name: htop
+      state: present
+
+...
