@@ -38,6 +38,7 @@
      apt_repository:
       repo: deb https://download.docker.com/linux/debian buster stable
       state: present
+      update_cache: yes
 
    - name: install docker
      apt:
@@ -54,5 +55,19 @@
       name: docker
       state: started
       enabled: yes
+
+   - name: install docker python
+     apt:
+      name: python-docker
+      state: present
+
+   - name: Lancer HTTPD Container
+     docker_container:
+       name: apache-server
+       image: httpd
+       state: started
+       ports:
+         - "8600:80"
+       
 
 ...
