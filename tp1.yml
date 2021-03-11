@@ -16,4 +16,43 @@
      apt:
       name: git
       state: present
+
+   - name: install dipendences
+     apt:
+      name: "{{item}}"
+      state: present
+      update_cache: yes
+     loop:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - gnupg-agent
+      - software-properties-common
+
+   - name: Docker apt key
+     apt_key:
+      url: https://download.docker.com/linux/debian/gpg 
+      state: present 
+
+   - name: create apt repository
+     apt_repository:
+      repo: deb https://download.docker.com/linux/debian buster stable
+      state: present
+
+   - name: install docker
+     apt:
+      name: "{{item}}"
+      state: latest
+      update_cache: yes
+     loop:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+
+   - name: activer le service
+     service:
+      name: docker
+      state: started
+      enabled: yes
+
 ...
