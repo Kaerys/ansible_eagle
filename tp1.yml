@@ -7,4 +7,13 @@
       name: htop
       state: present
 
+   - name: package zsh
+     apt:
+      name: zsh
+      state: present
+
+   - name: instal git
+     apt:
+      name: git
+      state: present
 ...
